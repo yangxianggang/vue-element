@@ -5,6 +5,7 @@ import store from "../store";
 // import tab from "../views/tab/tab";
 import ta from "element-ui/src/locale/lang/ta";
 import money from "../views/money/money";
+import da from "element-ui/src/locale/lang/da";
 
 
 export const initMenu = (router, store) => {
@@ -12,53 +13,53 @@ export const initMenu = (router, store) => {
      return;
   }
   postRequest("/api/menu/queryMenu").then(data => {
+    console.log(data);
     if (data) {
-
-      //格式化Router
-      let fmtRoutes = formatRoutes(data);
-
-      //添加路由
-      router.addRoutes(fmtRoutes);
-      //将数据存入vuex
-      store.commit('initRoutes', fmtRoutes)
+      //
+      // //格式化Router
+      // let fmtRoutes = formatRoutes(data);
+      //
+      // //添加路由
+      // router.addRoutes(fmtRoutes);
+      // //将数据存入vuex
+      store.commit('initRoutes',data);
     }
 
   })
 
 }
-export const formatRoutes = (routes) => {
-  let fmtRoutes = [];
-  routes.forEach(router => {
-    let {
-      menu_name,//菜单名
-      menu_path,//菜单请求路径
-      menuBeans,
-      component,
-    } = router;
-    //递归
-    if (menuBeans && menuBeans instanceof Array) {
-      menuBeans = formatRoutes(menuBeans)
-    }
-
-
-    let fmRouter = {
-      path: menu_path,
-      name: menu_name,
-      children: menuBeans,
-     // component(resolve) {
-     //    console.log(component)
-     //   if (component != null) {
-     //     require(['../views/' + component + '/' + component + '.vue'], resolve)
-     //
-     //   }
-     // }
-
-    }
-    fmtRoutes.push(fmRouter)
-
-   });
-  return fmtRoutes;
-}
+// export const formatRoutes = (routes) => {
+//   let fmtRoutes = [];
+//   routes.forEach(router => {
+//     let {
+//       menu_name,//菜单名
+//       menu_path,//菜单请求路径
+//       menuBeans
+//     } = router;
+//     //递归
+//     if (menuBeans && menuBeans instanceof Array) {
+//       menuBeans = formatRoutes(menuBeans)
+//     }
+//
+//
+//     let fmRouter = {
+//       path: menu_path,
+//       name: menu_name,
+//       children: menuBeans,
+//      // component(resolve) {
+//      //    console.log(component)
+//      //   if (component != null) {
+//      //     require(['../views/' + component + '/' + component + '.vue'], resolve)
+//      //
+//      //   }
+//      // }
+//
+//     }
+//     fmtRoutes.push(fmRouter)
+//
+//    });
+//   return fmtRoutes;
+// }
 
 
 //component:resolve => require(['../views/tab/tab.vue'], resolve),

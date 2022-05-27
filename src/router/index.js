@@ -66,8 +66,8 @@ import  tab from "../views/tab/tab";
     ]
   }
 ]
-const router = new VueRouter({
+const routerrr = new VueRouter({
   mode:'history',
   routes
 })
-export default router
+export default routerrr

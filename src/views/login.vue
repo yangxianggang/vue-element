@@ -65,7 +65,8 @@
     onsubmit(formName) {
       //进行表单验证
        this.$refs[formName].validate((valid) => {
-        if (valid) {           //配置登录成功的一个参数状态 用在main.js 跳转路由之前
+        if (valid) {
+          //配置登录成功的一个参数状态 用在main.js 跳转路由之前
          sessionStorage.setItem("isLogin",'true')
           //配置store 放入对象
          // this.$store.dispatch("asyncUpdateUser",{name:this.form.userName})

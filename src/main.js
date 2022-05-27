@@ -41,7 +41,6 @@ router.beforeEach((to, from, next) => {
 
   if (isLogin) {
     initMenu(router, store)
-
     next()
   } else {
     if (to.path == '/login') { //如果是登录页面路径，就直接next()

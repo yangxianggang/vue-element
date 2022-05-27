@@ -14,13 +14,24 @@
         </el-dropdown>
         <span> 欢迎您登录，您的昵称：{{nickName}}，您的账号：{{username}}</span>
       </el-header>
+<!--      <el-container>-->
+<!--        <el-aside width="200px">-->
+<!--          <el-menu @select="menuClick">-->
+<!--            <el-submenu index="1">-->
+<!--              <template slot="title"><i>导航仪</i></template>-->
+<!--              <el-menu-item index="/money/money">金钱</el-menu-item>-->
+<!--              <el-menu-item index="/money/money">ddd</el-menu-item>-->
+<!--            </el-submenu>-->
+<!--          </el-menu>-->
+<!--        </el-aside>-->
+<!--      </el-container>-->
       <el-container>
         <el-aside width="200px">
           <el-menu router unique-opened>
-            <el-submenu :index="index+''" v-for="(item,index) in  routes" :key="index" v-if="!item.hidden">
-              <template slot="title"><i class="el-icon-location"></i><span>{{ item.name }}</span></template>
+            <el-submenu :index="index+''" v-for="(item,index) in  routes" :key="index">
+              <template slot="title"><i class="el-icon-location"></i><span>{{ item.menu_name }}</span></template>
               <el-menu-item-group>
-                <el-menu-item :index=children.path v-for="(children,indexx) in item.children" :key="indexx">{{ children.name }}
+                <el-menu-item :index=children.menu_path v-for="(children,indexx) in item.menuBeans" :key="indexx">{{ children.menu_name }}
                 </el-menu-item>
               </el-menu-item-group>
             </el-submenu>
@@ -29,7 +40,7 @@
         <el-main>
           <!--        对应的路由-->
           <el-breadcrumb separator-class="el-icon-arrow-right" v-if="this.$router.currentRoute.path!='/home'">
-            <el-breadcrumb-item :to="{path:'/home'}">首页</el-breadcrumb-item>
+            <el-breadcrumb-item :to="{path:'/Home'}">首页</el-breadcrumb-item>
             <el-breadcrumb-item>{{this.$router.currentRoute.name}}</el-breadcrumb-item>
 
           </el-breadcrumb>
@@ -50,7 +61,6 @@ export default {
   computed: {
     routes() {
       console.log( 'this.$store.state.routes')
-      console.log( this.$store.state.routes)
        return this.$store.state.routes;
     },
 
@@ -64,7 +74,6 @@ export default {
   methods:{
     commandHandler(command){
       if (command=="logout"){
-
         this.$confirm('是否执行注销操作?', '提示', {
           confirmButtonText: '确定',
           cancelButtonText: '取消',
@@ -85,7 +94,10 @@ export default {
         });
 
       }
-    }
+    },
+    // menuClick(index){
+    //   this.$router.push(index);
+    // }
   }
 
 
