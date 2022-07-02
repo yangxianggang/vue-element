@@ -33,8 +33,13 @@ Vue.config.productionTip = false
 //路由跳转之前
 /**
  * to 即将进行
+ * 路由导航前置守卫
  */
 router.beforeEach((to, from, next) => {
+  console.log(to);
+  console.log(from);
+
+
   //获取登录的状态
   let isLogin = sessionStorage.getItem("isLogin");
 

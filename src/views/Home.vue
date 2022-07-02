@@ -58,6 +58,7 @@ import {postRequest} from "../utils/api";
 
 export default {
   name: "Home",
+  //默认加载数据
   computed: {
     routes() {
       console.log( 'this.$store.state.routes')
