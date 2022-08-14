@@ -32,6 +32,7 @@ axios.interceptors.response.use(success => {
 
 
 }, error => {
+  console.log(error)
    if (error.response.code == 504 || error.response.code == 404) {
     Message.error({message: '失败'})
   } else if (error.response.code == 403) {

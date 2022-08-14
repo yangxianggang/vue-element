@@ -29,9 +29,9 @@
         <el-aside width="200px">
           <el-menu router unique-opened>
             <el-submenu :index="index+''" v-for="(item,index) in  routes" :key="index">
-              <template slot="title"><i class="el-icon-location"></i><span>{{ item.menu_name }}</span></template>
+              <template slot="title"><i class="el-icon-location"></i><span>{{ item.menuName }}</span></template>
               <el-menu-item-group>
-                <el-menu-item :index=children.menu_path v-for="(children,indexx) in item.menuBeans" :key="indexx">{{ children.menu_name }}
+                <el-menu-item :index=children.menuPath v-for="(children,indexx) in item.menuBeans" :key="indexx">{{ children.menuName }}
                 </el-menu-item>
               </el-menu-item-group>
             </el-submenu>
