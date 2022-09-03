@@ -2,7 +2,7 @@
   <div>
     <el-container>
       <el-header class="homeHeader">
-      <div class="title">不知道叫啥</div>
+      <div  class="title">维修管理</div>
 
         <el-dropdown @command="commandHandler">
           <i class="el-icon-setting" style="margin-left: 950px"></i>

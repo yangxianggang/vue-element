@@ -11,6 +11,9 @@ import MemberLevel from '../views/member/memberLevel'
 //引入money页面
 import money from "../views/money/money";
 import  tab from "../views/tab/tab";
+import store from "../views/computerinfo/store/store";
+import failure from "../views/computerinfo/failure/failure";
+import user from "../views/computerinfo/user/user";
 
 
 
@@ -59,9 +62,19 @@ import  tab from "../views/tab/tab";
         component: money
       },
       {
-        path: '/tab/tab',
-        name: '金钱列表',
-        component: tab
+        path: '/computer/store/store',
+        name: '电脑门店信息列表',
+        component: store
+      },
+      {
+        path: '/computer/failure/failure',
+        name: '电脑故障信息列表',
+        component: failure
+      },
+      {
+        path: '/computer/user/user',
+        name: '电脑用户信息',
+        component: user
       },
     ]
   }
