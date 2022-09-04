@@ -84,7 +84,7 @@
                 type="danger"
                 @click="handleDelete(scope.$index, scope.row)">删除
               </el-button>
-              <el-button @click="queryAllStoreEmployeesInfo(scope.row)" size="mini">
+              <el-button @click="queryAllStoreEmployeesInfo(scope.$index, scope.row)" size="mini">
                 员工信息
               </el-button>
 
@@ -421,12 +421,15 @@ export default {
     }
   },
   mounted() {
-    this.queryAllComputerStore({});//页面初始化加载的方法
+    //查询全部门店列表信息
+    let data={};
+    this.queryAllComputerStore(data);//页面初始化加载的方法
   },
   //方法
   methods: {
+    //更新门店员工信息
     doUpdateStoreEmployeesInfo() {
-      const data = {
+      let data = {
         storeEmployeesName: this.updateStoreEmployeesInfo.storeEmployeesName,
         storeEmployeesContact: this.updateStoreEmployeesInfo.storeEmployeesContact,
         storeEmployeesAddress: this.updateStoreEmployeesInfo.storeEmployeesAddress,
@@ -439,13 +442,14 @@ export default {
           this.updateStoreEmployeesInfoDialogVisible = false;
 
           this.drawer = false;
-          this.queryAllComputerStore({});//页面初始化加载的方法
+          let data={};
+          this.queryAllComputerStore(data);//页面初始化加载的方法
 
         }
       })
 
     },
-
+    //回显门店员工信息
     showEditViewStoreEmployeesInfo(index, data) {
       this.updateStoreEmployeesInfoDialogVisible = true;
       this.updateStoreEmployeesInfo.storeEmployeesName = data.storeEmployeesName;
@@ -455,6 +459,7 @@ export default {
       this.updateStoreEmployeesInfo.storeEmployeesId = data.storeEmployeesId;
     },
 
+    //删除门店员工信息
     handleDeleteStoreEmployeesInfo(index, data) {
       this.$confirm('此操作将永久删除该数据, 是否继续?', '提示', {
         confirmButtonText: '确定',
@@ -467,7 +472,8 @@ export default {
             this.updateStoreEmployeesInfoDialogVisible = false;
 
             this.drawer = false;
-            this.queryAllComputerStore({});//页面初始化加载的方法
+            let data={};
+            this.queryAllComputerStore(data);//页面初始化加载的方法
           }
         });
 
@@ -480,9 +486,9 @@ export default {
 
     },
 
-
+//添加门店员工信息
     doInserterStoreEmployeesInfo() {
-      const data = {
+      let data = {
         storeEmployeesName: this.storeEmployeesInfo.storeEmployeesName,
         storeEmployeesContact: this.storeEmployeesInfo.storeEmployeesContact,
         storeEmployeesAddress: this.storeEmployeesInfo.storeEmployeesAddress,
@@ -493,14 +499,15 @@ export default {
         if (resp) {
           this.addStoreEmployeesInfoDialogVisible = false;
           this.drawer = false;
-          this.queryAllComputerStore({});//页面初始化加载的方法
+          let data={};
+          this.queryAllComputerStore(data);//页面初始化加载的方法
         }
       })
 
     },
 
-
-    queryAllStoreEmployeesInfo(data) {
+    //查询门店员工列表
+    queryAllStoreEmployeesInfo(index,data) {
       this.drawer = true;
       this.storeEmployeesInfoStoreHead = data.storeHead;
       this.storeEmployeesInfoStoreHeadContact = data.storeHeadContact;
@@ -514,9 +521,9 @@ export default {
 
     },
 
-
+    //查询门店列表信息
     queryAllPageStore() {
-      const data = {
+      let data = {
         storeLandline: this.computerStore.storeLandline,
         storeHead: this.computerStore.storeHead,
         storeHeadContact: this.computerStore.storeHeadContact,
@@ -525,9 +532,9 @@ export default {
       this.queryAllComputerStore(data);
     },
 
-    //编辑
+    //编辑门店信息
     doUpdateComputerStore() {
-      const data = {
+      let data = {
         storeLandline: this.updateComputerStore.storeLandline,
         storeHead: this.updateComputerStore.storeHead,
         storeHeadContact: this.updateComputerStore.storeHeadContact,
@@ -538,13 +545,15 @@ export default {
       postRequest("/api/storeEmployees/updateStoreInfo", data).then(resp => {
         if (resp) {
           this.dialogVisible = false;
-          this.queryAllComputerStore({});
+          let data={};
+          this.queryAllComputerStore(data);
 
         }
       })
     },
+    //保存门店信息
     doInserterComputerStore() {
-      const data = {
+      let data = {
         storeLandline: this.addComputerStore.storeLandline,
         storeHead: this.addComputerStore.storeHead,
         storeHeadContact: this.addComputerStore.storeHeadContact,
@@ -556,7 +565,8 @@ export default {
       postRequest("/api/storeEmployees/saveStoreInfo", data).then(resp => {
         if (resp) {
           this.addDialogVisible = false;
-          this.queryAllComputerStore({});
+          let data={};
+          this.queryAllComputerStore(data);
           this.addComputerStore.storeLandline = '';
           this.addComputerStore.storeHead = '';
           this.addComputerStore.storeHeadContact = '';
@@ -598,7 +608,8 @@ export default {
 
         postRequest("/api/storeEmployees/updateStoreInfoDeleteFlag", {storeId: data.storeId}).then(resp => {
           if (resp) {
-            this.queryAllComputerStore({});
+            let data={};
+            this.queryAllComputerStore(data);
           }
         });
 
