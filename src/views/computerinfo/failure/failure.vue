@@ -19,33 +19,14 @@
         suffix-icon="el-icon-plus"
         v-model="computerFailure.computerUserName">
       </el-input>
-<!--      <el-input-->
-<!--        class="moneyinput"-->
-<!--        placeholder="是否在保修期内"-->
-<!--        suffix-icon="el-icon-plus"-->
-<!--        v-model="computerFailure.warrantyFlag">-->
-<!--      </el-input>-->
-<!--      <el-input-->
-<!--        class="moneyinput"-->
-<!--        placeholder="故障状态"-->
-<!--        suffix-icon="el-icon-plus"-->
-<!--        v-model="computerFailure.failureStatus">-->
-<!--      </el-input>-->
-<!--      <el-input-->
-<!--        class="moneyinput"-->
-<!--        placeholder="维修状态"-->
-<!--        suffix-icon="el-icon-plus"-->
-<!--        v-model="computerFailure.maintenanceStatus">-->
-<!--      </el-input>-->
-
-      <div class="div-yxg-input" style="width: 1000px">
+      <div class="div-failure-yxg-input" style="width: 1000px">
         是否在保修期内：
         <template>
           <el-radio v-model="computerFailure.warrantyFlag" label="0">否</el-radio>
           <el-radio v-model="computerFailure.warrantyFlag" label="1">是</el-radio>
         </template>
       </div>
-      <div class="div-yxg-input"  style="width: 1000px">
+      <div class="div-failure-yxg-input" style="width: 1000px">
         故障状态：
         <template>
           <el-radio v-model="computerFailure.failureStatus" label="1">一般</el-radio>
@@ -54,7 +35,7 @@
           <el-radio v-model="computerFailure.failureStatus" label="4">大修</el-radio>
         </template>
       </div>
-      <div class="div-yxg-input" style="width: 1000px">
+      <div class="div-failure-yxg-input" style="width: 1000px">
         维修状态：
         <template>
           <el-radio v-model="computerFailure.maintenanceStatus" label="1">排队中</el-radio>
@@ -65,9 +46,8 @@
       </div>
 
 
-
       <el-button icon="el-icon-plus" @click="addComputerFailureShowEditView" type="primary">添加</el-button>
-      <el-button    type="primary">搜索</el-button>
+      <el-button type="primary" @click="queryAllPageParam">搜索</el-button>
 
     </div>
     <div>
@@ -131,33 +111,33 @@
         </el-table-column>
       </el-table>
     </div>
-    <!--    弹出框展示数据，默认不展示-->
+    <!-- 电脑故障信息修改 弹框-------------------------------------------------begin-->
     <el-dialog
-      title="提示"
+      title="电脑故障信息修改"
       :visible.sync="dialogVisible"
     >
-      <div class="div-yxg-input">
+      <div class="div-failure-yxg-input">
         电脑品牌型号：
         <el-input class="el-input"
                   placeholder="请输入内容"
                   v-model="updateComputerFailure.brandModels">
         </el-input>
       </div>
-      <div class="div-yxg-input">
+      <div class="div-failure-yxg-input">
         快速服务代码：
         <el-input class="el-input"
                   placeholder="请输入内容"
                   v-model="updateComputerFailure.quickServiceCode">
         </el-input>
       </div>
-      <div class="div-yxg-input">
+      <div class="div-failure-yxg-input">
         客户姓名：
         <el-input class="el-input"
                   placeholder="请输入内容"
                   v-model="updateComputerFailure.computerUserName">
         </el-input>
       </div>
-      <div class="div-yxg-input" style="width: 400px">
+      <div class="div-failure-yxg-input" style="width: 400px">
         是否在保修期内：
         <template>
           <el-radio-group v-model="updateComputerFailure.warrantyFlag">
@@ -166,7 +146,7 @@
           </el-radio-group>
         </template>
       </div>
-      <div class="div-yxg-input">
+      <div class="div-failure-yxg-input">
         故障状态：
         <template>
           <el-radio-group v-model="updateComputerFailure.failureStatus">
@@ -177,7 +157,7 @@
           </el-radio-group>
         </template>
       </div>
-      <div class="div-yxg-input">
+      <div class="div-failure-yxg-input">
         维修状态：
         <template>
           <el-radio-group v-model="updateComputerFailure.maintenanceStatus">
@@ -193,39 +173,41 @@
     <el-button type="primary" @click="doUpdate">确 定</el-button>
   </span>
     </el-dialog>
+    <!-- 电脑故障信息修改 弹框-------------------------------------------------end-->
+    <!--电脑故障信息登记 弹框                                                              begin-->
     <el-dialog
-      title="提示"
+      title="电脑故障信息登记"
       :visible.sync="addDialogVisible"
     >
-      <div class="div-yxg-input">
+      <div class="div-failure-yxg-input">
         客户姓名：
         <el-input class="el-input"
                   placeholder="请输入内容"
                   v-model="addComputerFailure.computerUserName">
         </el-input>
       </div>
-      <div class="div-yxg-input">
+      <div class="div-failure-yxg-input">
         电脑客户联系方式：
         <el-input class="el-input"
                   placeholder="请输入内容"
                   v-model="addComputerFailure.computerUserContact">
         </el-input>
       </div>
-      <div class="div-yxg-input">
+      <div class="div-failure-yxg-input">
         电脑客户住址：
         <el-input class="el-input"
                   placeholder="请输入内容"
                   v-model="addComputerFailure.computerUserAddress">
         </el-input>
       </div>
-      <div class="div-yxg-input">
+      <div class="div-failure-yxg-input">
         电脑品牌型号：
         <el-input class="el-input"
                   placeholder="请输入内容"
                   v-model="addComputerFailure.brandModels">
         </el-input>
       </div>
-      <div class="div-yxg-input">
+      <div class="div-failure-yxg-input">
         服务编号：
         <el-input class="el-input"
                   placeholder="请输入内容"
@@ -233,28 +215,28 @@
         </el-input>
       </div>
 
-      <div class="div-yxg-input">
+      <div class="div-failure-yxg-input">
         快速服务代码：
         <el-input class="el-input"
                   placeholder="请输入内容"
-                  v-model="addComputerFailure.failureInformation">
+                  v-model="addComputerFailure.quickServiceCode">
         </el-input>
       </div>
-      <div class="div-yxg-input">
+      <div class="div-failure-yxg-input">
         故障信息详细描述：
         <el-input class="el-input"
                   placeholder="请输入内容"
                   v-model="addComputerFailure.failureInformationDetailed">
         </el-input>
       </div>
-      <div class="div-yxg-input" style="width: 331px">
+      <div class="div-failure-yxg-input" style="width: 331px">
         是否在保修期内：
         <template>
           <el-radio v-model="addComputerFailure.warrantyFlag" label="0">否</el-radio>
           <el-radio v-model="addComputerFailure.warrantyFlag" label="1">是</el-radio>
         </template>
       </div>
-      <div class="div-yxg-input">
+      <div class="div-failure-yxg-input">
         故障状态：
         <template>
           <el-radio v-model="addComputerFailure.failureStatus" label="1">一般</el-radio>
@@ -263,7 +245,7 @@
           <el-radio v-model="addComputerFailure.failureStatus" label="4">大修</el-radio>
         </template>
       </div>
-      <div class="div-yxg-input">
+      <div class="div-failure-yxg-input">
         维修状态：
         <template>
           <el-radio v-model="addComputerFailure.maintenanceStatus" label="1">排队中</el-radio>
@@ -272,14 +254,14 @@
           <el-radio v-model="addComputerFailure.maintenanceStatus" label="4">已报废</el-radio>
         </template>
       </div>
-      <div class="div-yxg-input">
+      <div class="div-failure-yxg-input">
         维修工程师员工姓名：
         <el-input class="el-input"
                   placeholder="请输入内容"
                   v-model="addComputerFailure.maintenanceEngineerName">
         </el-input>
       </div>
-      <div class="div-yxg-input">
+      <div class="div-failure-yxg-input">
         维修工程师联系电话：
         <el-input class="el-input"
                   placeholder="请输入内容"
@@ -291,6 +273,7 @@
     <el-button type="primary" @click="insertComputerFailure">确 定</el-button>
   </span>
     </el-dialog>
+    <!--电脑故障信息登记 弹框                                                              end-->
   </div>
 </template>
 
@@ -346,10 +329,32 @@ export default {
     }
   },
   mounted() {
-    this.queryAllComputerFailure();//页面初始化加载的方法
+    this.queryAllComputerFailure({});//页面初始化加载的方法
   },
   //方法
   methods: {
+
+    queryAllPageParam() {
+      // computerFailure: {
+      //   brandModels: '',//电脑品牌型号
+      //     quickServiceCode: '',//快速服务代码
+      //     computerUserName: '',//客户姓名
+      //     warrantyFlag: '',//是否在保修期内
+      //     failureStatus: '',//故障状态
+      //     maintenanceStatus: ''//维修状态
+      // }
+
+
+      const data = {
+        brandModels: this.computerFailure.brandModels,
+        quickServiceCode: this.computerFailure.quickServiceCode,
+        computerUserName: this.computerFailure.computerUserName,
+        warrantyFlag: this.computerFailure.warrantyFlag,
+        failureStatus: this.computerFailure.failureStatus,
+        maintenanceStatus: this.computerFailure.maintenanceStatus
+      }
+      this.queryAllComputerFailure(data);
+    },
 
     //编辑
     doUpdate() {
@@ -365,7 +370,7 @@ export default {
       postRequest("/api/computerFailure/updateComputerFailureInfoMaintenanceStatus", data).then(resp => {
         if (resp) {
           this.dialogVisible = false;
-          this.queryAllComputerFailure();
+          this.queryAllComputerFailure({});
 
         }
       })
@@ -405,7 +410,7 @@ export default {
           this.addComputerFailure.maintenanceEngineerName = '';//维修工程师员工姓名
           this.addComputerFailure.maintenanceEngineerContact = '';//维修工程师联系电话
           this.addDialogVisible = false;
-          this.queryAllComputerFailure();
+          this.queryAllComputerFailure({});
 
         }
       })
@@ -416,8 +421,8 @@ export default {
 
 
     //查询列表、初始化列表
-    queryAllComputerFailure() {
-      postRequest("/api/computerFailure/queryAllPageComputerFailure", {money: '11', name: '2222'}).then(resp => {
+    queryAllComputerFailure(data) {
+      postRequest("/api/computerFailure/queryAllPageComputerFailure", data).then(resp => {
         if (resp) {
           this.computerFailureTable = resp.data;
         }
@@ -438,18 +443,18 @@ export default {
     },
     //删除
     handleDelete(index, data) {
-      this.$confirm('此操作将永久删除该文件, 是否继续?', '提示', {
+      this.$confirm('此操作将永久删除该数据, 是否继续?', '提示', {
         confirmButtonText: '确定',
         cancelButtonText: '取消',
         type: 'warning'
       }).then(() => {
 
         postRequest("/api/computerFailure/updateComputerFailureInfoDeleteFlag", {
-          computerFailureId: this.updateComputerFailure.computerFailureId,
+          computerFailureId: data.computerFailureId,
           deleteFlag: 1
         }).then(resp => {
           if (resp) {
-            this.queryAllComputerFailure();
+            this.queryAllComputerFailure({});
           }
         });
 
@@ -473,7 +478,7 @@ export default {
   width: 320px;
 }
 
-.div-yxg-input {
+.div-failure-yxg-input {
   position: relative;
   font-size: 14px;
   display: inline-block;

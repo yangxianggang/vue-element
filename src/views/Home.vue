@@ -61,8 +61,7 @@ export default {
   //默认加载数据
   computed: {
     routes() {
-      console.log( 'this.$store.state.routes')
-       return this.$store.state.routes;
+        return this.$store.state.routes;
     },
 
     username() {

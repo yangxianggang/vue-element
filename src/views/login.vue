@@ -77,6 +77,7 @@
              if (resp){
                 window.sessionStorage.setItem("userName",  resp.data.userName);
                window.sessionStorage.setItem("nickName",  resp.data.nickName);
+               window.sessionStorage.setItem("password",  resp.data.password);
                //跳转到main页面，有对应的布局，其中money 是完整的CRUD 操作
               //  this.$router.push({name:'main',params: resp.data})
                //跳转到home首页
